@@ -1,13 +1,18 @@
 import Lottie from "lottie-react";
 import registerLottieAnimation from "../../lottie/register.json";
+import { useContext } from "react";
+import AuthContext from "../../context/Auth/AuthContext";
 
 const Register = () => {
+
+    const {createUser} = useContext(AuthContext);
+
   const handleRegister = (e) => {
     e.preventDefault();
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+    // console.log(email, password);
 
     const validatePassword = (password) => {
       const regex = /^(?=(.*[a-z]))(?=(.*[A-Z]))(?=(.*\d))([A-Za-z\d]{6,})$/;
@@ -17,6 +22,15 @@ const Register = () => {
     if(!validatePassword(password)){
         alert("Password is not correct format!")
     }
+
+
+    createUser(email, password)
+    .then(res => {
+        console.log(res.user);
+    })
+    .catch(error => {
+        console.log(error.message);
+    })
   };
 
   return (
