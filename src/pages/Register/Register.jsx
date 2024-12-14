@@ -2,10 +2,10 @@ import Lottie from "lottie-react";
 import registerLottieAnimation from "../../lottie/register.json";
 import { useContext } from "react";
 import AuthContext from "../../context/Auth/AuthContext";
+import SocialLogin from "../shared/SocialLogin";
 
 const Register = () => {
-
-    const {createUser} = useContext(AuthContext);
+  const { createUser } = useContext(AuthContext);
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -19,18 +19,17 @@ const Register = () => {
       return regex.test(password);
     };
 
-    if(!validatePassword(password)){
-        alert("Password is not correct format!")
+    if (!validatePassword(password)) {
+      alert("Password is not correct format!");
     }
 
-
     createUser(email, password)
-    .then(res => {
+      .then((res) => {
         console.log(res.user);
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         console.log(error.message);
-    })
+      });
   };
 
   return (
@@ -75,6 +74,8 @@ const Register = () => {
               <button className="btn btn-primary">Register</button>
             </div>
           </form>
+
+          <SocialLogin></SocialLogin>
         </div>
       </div>
     </div>
